@@ -1,0 +1,1 @@
+request.build_uri(animal.imagen.url) -> http//localhost:8000/media/animals/nombre_archivo.ext
