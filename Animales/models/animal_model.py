@@ -9,13 +9,14 @@ class Animal(models.Model):
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    imagen = models.ImageField(upload_to='animals/', null=True, blank=True) # name, url
+    imagen = models.ImageField(upload_to='animals/', null=True, blank=True)
     es_refugio = models.BooleanField(default=False)
     categoria = models.CharField(
         max_length=50,
         choices=[("Perro", "Perro"), ("Gato", "Gato"), ("Otro", "Otro")],
         default="Otro"
     )
+    raza = models.CharField(default="sin raza", max_length=200, blank=False, null=False)
 
     class Meta:
         db_table = 'adoptados'
@@ -40,16 +41,18 @@ class Animal(models.Model):
 
         super().save(*args, **kwargs)
 
+
 class Encontrados(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    imagen = models.ImageField(upload_to='animals/', null=True, blank=True) # name, url
+    imagen = models.ImageField(upload_to='animals/', null=True, blank=True)
     categoria = models.CharField(
         max_length=50,
         choices=[("Perro", "Perro"), ("Gato", "Gato"), ("Otro", "Otro")],
         default="Otro"
     )
+    raza = models.CharField(default="sin raza", max_length=200, blank=False, null=False)
 
     class Meta:
         db_table = 'encontrados'
@@ -66,13 +69,15 @@ class Encontrados(models.Model):
             slug = base_slug
             contador = 1
 
-            while Animal.objects.filter(slug=slug).exists():
+            while Encontrados.objects.filter(slug=slug).exists():
                 slug = f"{base_slug}-{contador}"
                 contador += 1
 
             self.slug = slug
 
         super().save(*args, **kwargs)
+
+
 class Perdidos(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
     duenyo = models.CharField(max_length=200, blank=True, null=True)
@@ -80,13 +85,14 @@ class Perdidos(models.Model):
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    imagen = models.ImageField(upload_to='animals/', null=True, blank=True) # name, url
+    imagen = models.ImageField(upload_to='animals/', null=True, blank=True)
     es_refugio = models.BooleanField(default=False)
     categoria = models.CharField(
         max_length=50,
         choices=[("Perro", "Perro"), ("Gato", "Gato"), ("Otro", "Otro")],
         default="Otro"
     )
+    raza = models.CharField(default="sin raza", max_length=200, blank=False, null=False)
 
     class Meta:
         db_table = 'perdidos'
@@ -103,13 +109,15 @@ class Perdidos(models.Model):
             slug = base_slug
             contador = 1
 
-            while Animal.objects.filter(slug=slug).exists():
+            while Perdidos.objects.filter(slug=slug).exists():
                 slug = f"{base_slug}-{contador}"
                 contador += 1
 
             self.slug = slug
 
         super().save(*args, **kwargs)
+
+
 class Favoritos(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
     duenyo = models.CharField(max_length=200, blank=True, null=True)
@@ -117,8 +125,9 @@ class Favoritos(models.Model):
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    imagen = models.ImageField(upload_to='animals/', null=True, blank=True) # name, url
+    imagen = models.ImageField(upload_to='animals/', null=True, blank=True)
     es_refugio = models.BooleanField(default=False)
+    raza = models.CharField(default="sin raza", max_length=200, blank=False, null=False)
     categoria = models.CharField(
         max_length=50,
         choices=[("Perro", "Perro"), ("Gato", "Gato"), ("Otro", "Otro")],
@@ -140,7 +149,7 @@ class Favoritos(models.Model):
             slug = base_slug
             contador = 1
 
-            while Animal.objects.filter(slug=slug).exists():
+            while Favoritos.objects.filter(slug=slug).exists():
                 slug = f"{base_slug}-{contador}"
                 contador += 1
 
