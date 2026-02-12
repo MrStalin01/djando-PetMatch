@@ -74,3 +74,12 @@ class FavoritoSerializer(serializers.ModelSerializer):
         if obj.imagen:
             return request.build_absolute_uri(obj.imagen.url)
         return None
+
+    # serializers.py
+
+class CrearAnimalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Animal
+        fields = ['nombre', 'duenyo', 'edad', 'localizacion', 'descripcion', 'categoria', 'raza', 'imagen',
+                      'es_refugio']
+
