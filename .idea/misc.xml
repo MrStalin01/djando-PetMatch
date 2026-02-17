@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.13 (V5_TiendaOnline)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.13 (V5_TiendaOnline)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.14 (djando-PetMatch)" project-jdk-type="Python SDK" />
 </project>
