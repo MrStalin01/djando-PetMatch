@@ -76,7 +76,4 @@ class RegisterView(APIView):
                 "refresh": str(refresh)
             }, status=status.HTTP_201_CREATED)
 
-        return Response({
-            "success": False,
-            "errors": serializer.errors
-        }, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
