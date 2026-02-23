@@ -1,5 +1,10 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response # Para poder enviar datos a Android
+from rest_framework import status             # Para los códigos de error (200, 400, etc.)
+from rest_framework.permissions import IsAuthenticated # Para proteger el perfil
+from ..models import users_model               # Tu modelo de perfil
+from rest_framework.views import APIView
 
 from Users.models import User
 
@@ -61,3 +66,4 @@ class LoginSerializer(serializers.ModelSerializer):
                 "username": user.username
             }
         }
+
