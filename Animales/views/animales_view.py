@@ -26,6 +26,26 @@ class PerdidoListAPIView(APIView):
 
 class FavoritoListAPIView(APIView):
 
+    def delete(self, request):
+        # Obtenemos los parámetros de la URL (Query Params)
+        nombre = request.query_params.get('nombre')
+        duenyo = request.query_params.get('duenyo')
+
+        if not nombre or not duenyo:
+            return Response(
+                {"error": "Se requiere nombre y dueño para eliminar"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Buscamos el favorito que coincida
+        favorito = Favoritos.objects.filter(nombre=nombre, duenyo=duenyo).first()
+
+        if favorito:
+            favorito.delete()
+            return Response({"message": "Eliminado de favoritos"}, status=status.HTTP_204_NO_CONTENT)
+
+        return Response({"error": "No se encontró el animal en favoritos"}, status=status.HTTP_404_NOT_FOUND)
+
 
     def get(self, request):
         animales = Favoritos.objects.all()
