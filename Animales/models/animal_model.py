@@ -139,12 +139,20 @@ class Favoritos(models.Model):
         ordering = ['nombre']
         verbose_name = 'Favorito'
         verbose_name_plural = 'Favoritos'
-        unique_together = [['nombre', 'duenyo', 'localizacion']]
+        unique_together = [['nombre', 'duenyo', 'localizacion']] #Esto hace que no se repita el animal una vez lo guardas en favorito
 
     def __str__(self):
         return f"{self.nombre} [{self.categoria}]"
 
     def save(self, *args, **kwargs):
+        if not self.pk:  # Solo si es una creación nueva
+            existe = Favoritos.objects.filter(
+                nombre=self.nombre,
+                duenyo=self.duenyo,
+                localizacion=self.localizacion
+            ).exists()
+            if existe:
+                raise ValidationError("Este animal ya está en tus favoritos.")
         if not self.slug:
             base_slug = slugify(self.nombre)
             slug = base_slug
