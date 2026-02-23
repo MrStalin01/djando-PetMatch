@@ -139,6 +139,7 @@ class Favoritos(models.Model):
         ordering = ['nombre']
         verbose_name = 'Favorito'
         verbose_name_plural = 'Favoritos'
+        unique_together = [['nombre', 'duenyo', 'localizacion']]
 
     def __str__(self):
         return f"{self.nombre} [{self.categoria}]"
