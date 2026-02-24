@@ -1,5 +1,9 @@
 from rest_framework import serializers
-
+from rest_framework.response import Response # Para poder enviar datos a Android
+from rest_framework import status             # Para los códigos de error (200, 400, etc.)
+from rest_framework.permissions import IsAuthenticated # Para proteger el perfil
+from ..models import users_model               # Tu modelo de perfil
+from rest_framework.views import APIView
 from Users.models import User
 
 
@@ -8,8 +12,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     username = serializers.CharField(required=True)
     first_name = serializers.CharField(required=True, min_length=3)
     last_name = serializers.CharField(required=True, min_length=3)
-    password1 = serializers.CharField(required=True, min_length=6)
-    password2 = serializers.CharField(required=True, min_length=6)
+    password1 = serializers.CharField(required=True, min_length=8)
+    password2 = serializers.CharField(required=True, min_length=8)
 
     class Meta:
         model = User
@@ -75,3 +79,4 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
