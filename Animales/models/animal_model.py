@@ -4,7 +4,7 @@ from django.utils.text import slugify
 
 class Animal(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
-    duenyo = models.CharField(max_length=200, blank=True, null=True)
+    duenyo = models.CharField(max_length=200, blank=True, null=True, verbose_name="Dueño")
     edad = models.IntegerField(verbose_name="Edad", default=1)
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
@@ -80,7 +80,7 @@ class Encontrados(models.Model):
 
 class Perdidos(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
-    duenyo = models.CharField(max_length=200, blank=True, null=True)
+    duenyo = models.CharField(max_length=200, blank=True, null=True, verbose_name="Dueño")
     edad = models.IntegerField(verbose_name="Edad", default=1)
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
@@ -120,7 +120,7 @@ class Perdidos(models.Model):
 
 class Favoritos(models.Model):
     nombre = models.CharField(max_length=200, blank=False, null=False)
-    duenyo = models.CharField(max_length=200, blank=True, null=True)
+    duenyo = models.CharField(max_length=200, blank=True, null=True, verbose_name="Dueño")
     edad = models.IntegerField(verbose_name="Edad", default=1)
     localizacion = models.CharField(max_length=200, null=True, blank=True)
     descripcion = models.TextField(max_length=200, blank=True, null=True)
