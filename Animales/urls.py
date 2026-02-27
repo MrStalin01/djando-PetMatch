@@ -5,9 +5,9 @@ from .views.animales_view import (
     AdoptadoListAPIView,
     EncontradoListAPIView,
     PerdidoListAPIView,
-    FavoritoDELListAPIView
+    FavoritoDELListAPIView, FavoritoListAPIView
 )
-
+from .views.mascotas_personales_view import MascotaPersonalListAPIView
 urlpatterns = [
     path('adoptados/', AdoptadoListAPIView.as_view(), name='adoptados_list'),
     path('encontrados/', EncontradoListAPIView.as_view(), name='encontrados_list'),
@@ -17,5 +17,6 @@ urlpatterns = [
     path('crear_adoptado/', CrearAdoptadoAPIView.as_view(), name='crear_adoptado'),
     path('crear_encontrado/', CrearEncontradoAPIView.as_view(), name='crear_encontrado'),
     path('crear_perdido/', CrearPerdidoAPIView.as_view(), name='crear_perdido'),
-
+    path('favoritos/', FavoritoListAPIView.as_view(), name='favoritos-list'),
+    path('mascotas_personales/', MascotaPersonalListAPIView.as_view(), name='mascotas-personales'),
 ]

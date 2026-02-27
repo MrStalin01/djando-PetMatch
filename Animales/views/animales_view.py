@@ -1,8 +1,12 @@
+from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from rest_framework.parsers import MultiPartParser, FormParser
-from ..serializers.animales_serializers import CrearAnimalSerializer, CrearEncontradoSerializer, CrearPerdidoSerializer
+
+from ..models.animal_model import MascotaPersonal
+from ..serializers.animales_serializers import CrearAnimalSerializer, CrearEncontradoSerializer, CrearPerdidoSerializer, \
+    MascotaPersonalSerializer
 from rest_framework.generics import ListAPIView
 from ..models import Animal, Encontrados, Perdidos, Favoritos
 from rest_framework.generics import ListCreateAPIView
@@ -106,3 +110,8 @@ class FavoritoDELListAPIView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class MascotaPersonalListAPIView(generics.ListCreateAPIView):
+   queryset = MascotaPersonal.objects.all()
+   serializer_class = MascotaPersonalSerializer
+   permission_class = [AllowAny]
