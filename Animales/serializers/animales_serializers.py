@@ -65,9 +65,23 @@ class FavoritoSerializer(serializers.ModelSerializer):
         return "Sí" if obj.es_refugio else "No"
 
 
+# ... (deja tus otros serializers que ya tenías arriba intactos) ...
+
 class CrearAnimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Animal
-        fields = ['nombre', 'duenyo', 'edad', 'localizacion', 'descripcion', 'categoria', 'raza', 'imagen',
-                      'es_refugio']
+        fields = ['nombre', 'duenyo', 'edad', 'localizacion', 'descripcion', 'categoria', 'raza', 'imagen', 'es_refugio']
 
+# NUEVO: Para guardar en Encontrados
+class CrearEncontradoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Encontrados
+        # Nota: Me he basado en los campos que tenías en tu EncontradoSerializer.
+        # Si en tu modelo de Encontrados hay más campos (como descripcion), añádelos aquí.
+        fields = ['nombre', 'localizacion', 'categoria', 'raza', 'imagen']
+
+# NUEVO: Para guardar en Perdidos
+class CrearPerdidoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Perdidos
+        fields = ['nombre', 'duenyo', 'edad', 'localizacion', 'descripcion', 'categoria', 'raza', 'imagen', 'es_refugio']
