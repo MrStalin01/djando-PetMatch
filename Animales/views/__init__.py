@@ -6,5 +6,6 @@ from .animales_view import (
     AdoptadoListAPIView,
     EncontradoListAPIView,
     PerdidoListAPIView,
+    FavoritoDELListAPIView,
     FavoritoListAPIView,
 )
